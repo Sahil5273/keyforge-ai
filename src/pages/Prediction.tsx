@@ -28,7 +28,16 @@ export default function Prediction() {
         const scores: number[] = [];
         
         querySnapshot.forEach((doc) => {
-          scores.push(doc.data().wpm);
+          const data = doc.data();
+          const rawWpm = data.wpm;
+          const accuracy = data.accuracy;
+
+          // Calculate Effective WPM: WPM * (Accuracy as a decimal)
+          // This heavily penalizes spam-typing (like 111 WPM at 17% accuracy)
+          // while leaving high-accuracy tests mostly untouched.
+          const effectiveWpm = rawWpm * (accuracy / 100);
+          
+          scores.push(effectiveWpm);
         });
 
         setTestCount(scores.length);
@@ -48,7 +57,7 @@ export default function Prediction() {
 
         for (let i = 0; i < n; i++) {
           const x = i + 1; // Test number (1, 2, 3...)
-          const y = scores[i]; // WPM
+          const y = scores[i]; // Effective WPM
 
           sumX += x;
           sumY += y;
@@ -64,7 +73,8 @@ export default function Prediction() {
         const nextX = n + 1;
         const predictedY = Math.round(m * nextX + b);
 
-        setPrediction(predictedY);
+        // Prevent negative predictions just in case
+        setPrediction(predictedY > 0 ? predictedY : 0);
 
         if (m > 0.5) setTrend("improving");
         else if (m < -0.5) setTrend("declining");
