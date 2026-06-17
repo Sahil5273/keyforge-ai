@@ -1,73 +1,117 @@
-# React + TypeScript + Vite
+# >_ KEYFORGE_AI
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A high-performance, multilingual coding TypeRacer application designed to track, analyze, and predict user typing speeds using AI. 
 
-Currently, two official plugins are available:
+KeyForge AI allows users to practice typing code snippets, compete on a global leaderboard, and visualize their performance trends. The platform features an integrated AI prediction engine that utilizes Linear Regression to forecast future Words Per Minute (WPM) based on historical performance.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## ✨ Features
 
-## React Compiler
+* **Real-time Typing Arena:** Custom-built code editor interface tracking keystrokes, accuracy, and WPM in real-time.
+* **Authentication:** Secure Google Sign-In powered by Firebase Authentication.
+* **Global Leaderboard & User Profiles:** Persistent cloud storage of test results, displaying global rankings, personal history, and high scores.
+* **AI Prediction Engine:** Built-in linear regression model that analyzes past test trajectories to predict the user's next target WPM.
+* **Multilingual Support:** Includes specialized typing guides and layouts (e.g., Hindi Guide) to accommodate diverse developers.
+* **Dark Mode UI:** A sleek, developer-focused aesthetic using Tailwind CSS and glassmorphism effects.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🛠 Tech Stack
 
-## Expanding the ESLint configuration
+* **Frontend:** React 18, TypeScript, Vite
+* **Styling:** Tailwind CSS
+* **Backend/Database:** Firebase Firestore (NoSQL)
+* **Authentication:** Firebase Auth (Google Provider)
+* **Hosting:** Firebase Hosting
+* **Routing:** React Router v6
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 🚀 Getting Started (Local Setup)
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+To run KeyForge AI locally on your machine, follow these steps:
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### 1. Prerequisites
+Make sure you have the following installed:
+* [Node.js](https://nodejs.org/) (v18 or higher recommended)
+* [Git](https://git-scm.com/)
+
+### 2. Clone the Repository
+Open your terminal and clone the project:
+```bash
+git clone [https://github.com/Sahil5273/keyforge-ai.git](https://github.com/Sahil5273/keyforge-ai.git)
+cd keyforge-ai
+
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### 3. Install Dependencies
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Install all the required NPM packages:
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
+
 ```
+
+### 4. Configure Firebase
+
+To connect the app to your own database, you need to set up Firebase:
+
+1. Create a project in the [Firebase Console](https://console.firebase.google.com/).
+2. Enable **Authentication** (Google Sign-In Provider).
+3. Enable **Firestore Database** (Start in Test Mode).
+4. Go to Project Settings, add a Web App, and copy your configuration keys.
+5. In your local project, open `src/firebase.ts` and replace the placeholder `firebaseConfig` object with your keys:
+```typescript
+const firebaseConfig = {
+  apiKey: "YOUR_API_KEY",
+  authDomain: "YOUR_AUTH_DOMAIN",
+  projectId: "YOUR_PROJECT_ID",
+  storageBucket: "YOUR_STORAGE_BUCKET",
+  messagingSenderId: "YOUR_SENDER_ID",
+  appId: "YOUR_APP_ID"
+};
+
+```
+
+
+
+### 5. Start the Development Server
+
+Spin up the local Vite server:
+
+```bash
+npm run dev
+
+```
+
+The application will be running locally at `http://localhost:5173`.
+
+---
+
+## 📈 Deployment
+
+This project is configured for rapid deployment via Firebase Hosting.
+
+### 1. Build the Production App
+
+Compile the TypeScript and React code into optimized static files:
+
+```bash
+npm run build
+
+```
+
+### 2. Deploy to Firebase
+
+Ensure you have the Firebase CLI installed (`npm install -g firebase-tools`) and are logged in (`firebase login`), then run:
+
+```bash
+firebase deploy
+
+```
+
+Your app is now live!
+
+---
+
+## 📝 License
+
+This project is open-source and available under the MIT License.
