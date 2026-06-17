@@ -1,12 +1,14 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import Type from "./pages/Type";
 import Leaderboard from "./pages/Leaderboard";
 import Analytics from "./pages/Analytics";
 import HindiGuide from "./pages/HindiGuide";
 import Prediction from "./pages/Prediction";
-import Profile from "./pages/Profile"; // 1. Add this import
+import Profile from "./pages/Profile"; 
+import About from "./pages/About";
 
 export default function App() {
   return (
@@ -21,9 +23,11 @@ export default function App() {
             <Route path="/analytics" element={<Analytics />} />
             <Route path="/prediction" element={<Prediction />} />
             <Route path="/hindi-guide" element={<HindiGuide />} />
-            <Route path="/profile" element={<Profile />} /> {/* 2. Add this route */}
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/about" element={<About />} />
           </Routes>
         </main>
+          <Footer />
       </div>
     </Router>
   );
